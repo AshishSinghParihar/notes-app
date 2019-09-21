@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-button {
+    @extend .cursor-pointer;
+    color: blue;
+    font-size: smaller;
+}
+
+.hint-text {
+    font-size: smaller;
+}
+
+.mat-icon-form-field {
+    font-size: 100% !important;
+}

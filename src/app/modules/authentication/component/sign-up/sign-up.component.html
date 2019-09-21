@@ -1,0 +1,81 @@
+<div class="container-div d-flex justify-content-center">
+  <mat-card class="signup-card mt-5">
+    <mat-card-header>
+      <mat-card-title>Sign Up</mat-card-title>
+      <mat-card-subtitle>Regsiter yourself to the application</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="signUpForm">
+        <div class="row form-group mx-0">
+          <mat-form-field class="col-md-6 col-sm-12">
+            <input matInput placeholder="{{FieldLabelEnum.FIRST_NAME}}" [formControlName]="UserEnum.FIRST_NAME"
+              required>
+            <mat-error *ngIf="signUpForm.controls[UserEnum.FIRST_NAME].invalid">
+              {{getErrorMessage(FieldLabelEnum.FIRST_NAME, UserEnum.FIRST_NAME)}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6 col-sm-12">
+            <input matInput placeholder="{{FieldLabelEnum.LAST_NAME}}" [formControlName]="UserEnum.LAST_NAME" required>
+            <mat-error *ngIf="signUpForm.controls[UserEnum.LAST_NAME].invalid">
+              {{getErrorMessage(FieldLabelEnum.LAST_NAME, UserEnum.LAST_NAME)}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6 col-sm-12">
+            <input matInput placeholder="{{FieldLabelEnum.USERNAME}}" [formControlName]="UserEnum.USERNAME" required>
+            <mat-error *ngIf="signUpForm.controls[UserEnum.USERNAME].invalid">
+              {{getErrorMessage(FieldLabelEnum.USERNAME, UserEnum.USERNAME)}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6 col-sm-12">
+            <input matInput placeholder="{{FieldLabelEnum.PASSWORD}}" [formControlName]="UserEnum.PASSWORD"
+              [type]="hidePassword ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix (mousedown)="togglePasswordVisibility()"
+              (mouseup)="togglePasswordVisibility()" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword" *ngIf="signUpForm.controls[UserEnum.PASSWORD].value !== ''">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="signUpForm.controls[UserEnum.PASSWORD].invalid">
+              {{getErrorMessage(FieldLabelEnum.PASSWORD, UserEnum.PASSWORD)}}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="dob_picker" placeholder="{{FieldLabelEnum.DOB}}"
+                [formControlName]="UserEnum.DOB" readonly>
+              <mat-datepicker-toggle matSuffix [for]="dob_picker"></mat-datepicker-toggle>
+              <mat-datepicker #dob_picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="col-md-6 col-sm-12">
+            <input matInput placeholder="{{FieldLabelEnum.EMAIL}}" type="email" [formControlName]="UserEnum.EMAIL">
+            <mat-icon matSuffix class="mat-icon-form-field">email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6 col-sm-12">
+            <input matInput placeholder="{{FieldLabelEnum.PHONE_NUMBER}}" [formControlName]="UserEnum.CONTACT_NUMBER">
+            <mat-icon matSuffix class="mat-icon-form-field">phone</mat-icon>
+            <mat-hint>Include area code</mat-hint>
+          </mat-form-field>
+        </div>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="d-flex">
+        <div>
+          <button mat-button (click)="resetSignUpForm()">Reset</button>
+          <button mat-button color="primary" (click)="onSignUp()">Join</button>
+        </div>
+        <div class="ml-auto">
+          <span class="hint-text">Already registered?</span>&nbsp;&nbsp;<span class="text-button"
+            (click)="goToLoginPage()">Login</span>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

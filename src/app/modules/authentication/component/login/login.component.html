@@ -1,0 +1,46 @@
+<div class="container-div d-flex justify-content-center">
+  <mat-card class="login-card mt-5">
+    <mat-card-header>
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-card-subtitle>Get started by signing in to the application</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm">
+        <div class="row form-group mx-0">
+          <mat-form-field class="col-12">
+            <input matInput placeholder="{{FieldLabelEnum.USERNAME}}" [formControlName]="UserEnum.USERNAME" required>
+            <mat-error *ngIf="loginForm.controls[UserEnum.USERNAME].invalid">
+              {{getErrorMessage(FieldLabelEnum.USERNAME, UserEnum.USERNAME)}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row form-group mx-0">
+          <mat-form-field class="col-12">
+            <input matInput placeholder="{{FieldLabelEnum.PASSWORD}}" [formControlName]="UserEnum.PASSWORD"
+              [type]="hidePassword ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix (mousedown)="togglePasswordShow()" (mouseup)="togglePasswordShow()"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword"
+              *ngIf="loginForm.controls[UserEnum.PASSWORD].value !== ''">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.controls[UserEnum.PASSWORD].invalid">
+              {{getErrorMessage(FieldLabelEnum.PASSWORD, UserEnum.PASSWORD)}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="d-flex">
+        <div>
+          <button mat-button (click)="resetLoginForm()">Reset</button>
+          <button mat-button color="primary" (click)="onLogin()">LOGIN</button>
+        </div>
+        <div class="ml-auto">
+          <span class="hint-text">New user?</span>&nbsp;&nbsp;<span class="text-button" (click)="goToSignUpPage()">Sign
+            up</span>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
