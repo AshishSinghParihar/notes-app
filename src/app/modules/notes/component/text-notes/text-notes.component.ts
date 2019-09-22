@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TextNotes } from 'src/app/models/notes.model';
-import { NotesParent } from '../notes-parent';
 import { FormGroup } from '@angular/forms';
+
+import { NotesParent } from '../notes-parent';
 
 @Component({
   selector: 'app-text-notes',
@@ -10,8 +10,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class TextNotesComponent extends NotesParent implements OnInit {
   textNotesForm: FormGroup;
-
-  @Input() notes: TextNotes;
 
   ngOnInit() {
     this.textNotesForm = this.initTextNotesForm();
@@ -33,7 +31,6 @@ export class TextNotesComponent extends NotesParent implements OnInit {
       this.deleteNotes();
       return;
     }
-    const note = Object.assign(this.notes, this.textNotesForm.value);
-    this.utilityService.updateNote(note, this.index);
+    this.notes = Object.assign(this.notes, this.textNotesForm.value);
   }
 }

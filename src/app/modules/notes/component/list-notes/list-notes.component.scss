@@ -1,0 +1,47 @@
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+.item-remove-icon {
+  visibility: hidden;
+}
+
+.list-container {
+  &:hover .item-remove-icon {
+    visibility: visible;
+  }
+}
+
+.list-text-div {
+  margin-top: -3px;
+  width: 100%;
+}
+
+.new-item {
+  font-size: 14px;
+  margin-top: -8px;
+}
+
+.list-divider {
+  display: block;
+  margin: 0;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  padding-bottom: 0.2rem !important;
+}
+
+.checked-list-container {
+  @extend .list-container;
+  opacity: 0.5;
+}
+
+#completed-heading {
+  color: #5f6368;
+  padding-bottom: 0.4em;
+}
+
+.list-completed {
+  color: #5f6368;
+  text-decoration: line-through;
+}

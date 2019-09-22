@@ -2,12 +2,12 @@ import { UserEnum } from '../enums/notes-app.enum';
 import { Notes } from './notes.model';
 
 export class User {
-  [UserEnum.USERNAME]: string;
-  [UserEnum.PASSWORD]: string;
-  [UserEnum.FIRST_NAME]: string;
-  [UserEnum.LAST_NAME]: string;
-  [UserEnum.DOB]: string;
-  [UserEnum.CONTACT_NUMBER]: string;
-  [UserEnum.EMAIL]: string;
+  [UserEnum.USERNAME] = '';
+  [UserEnum.PASSWORD] = '';
+  [UserEnum.FIRST_NAME] = '';
+  [UserEnum.LAST_NAME] = '';
+  [UserEnum.DOB]: Date;
+  [UserEnum.CONTACT_NUMBER] = '';
+  [UserEnum.EMAIL] = '';
   [UserEnum.NOTES_LIST]: Notes[] = [];
 }

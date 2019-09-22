@@ -9,7 +9,7 @@ import {
   ErrorMessagesEnum,
   UserEnum
 } from 'src/app/enums/notes-app.enum';
-import { Notes, TextNotes } from 'src/app/models/notes.model';
+import { Notes, TextNotes, ListNotes, List } from 'src/app/models/notes.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +28,16 @@ export class UtilityService {
     const notes = new TextNotes();
     notes.title = 'Notes 1';
     notes.text =
-      // tslint:disable-next-line: max-line-length
-      'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.';
+      'The Shiba Inu is the smallest of the six original and distinct.';
     notes.creationDate = new Date();
     user1.notesList.push(notes);
 
-    const notes3 = new TextNotes();
+    const notes3 = new ListNotes();
     notes3.title = 'Notes 2';
-    notes3.text =
-      // tslint:disable-next-line: max-line-length
-      'This is the second note';
+    const list1 = new List();
+    list1.uncheckedList = ['Item1', 'Item 2'];
+    list1.checkedList = ['Item3', 'Item 4'];
+    notes3.list = list1;
     user1.notesList.push(notes3);
     this.registerUser(user1);
     this.loggedInUser = user1;
@@ -59,7 +59,8 @@ export class UtilityService {
   }
 
   registerUser(userDetails: User) {
-    this.registeredUsers.push(userDetails);
+    const user: User = Object.assign(new User(), userDetails);
+    this.registeredUsers.push(user);
   }
 
   verifyUser(username: string, password: string): User[] {

@@ -18,7 +18,7 @@ export class TextNotes extends Notes {
 }
 
 export class ListNotes extends Notes {
-  [NotesModelEnum.LIST]: List[] = [];
+  [NotesModelEnum.LIST]: List;
 
   constructor() {
     super();

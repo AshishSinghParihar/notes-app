@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <div class="notes-form-control" [formGroup]="listNotesForm">
+                <input matInput placeholder="Title" [formControlName]="NotesModelEnum.TITLE" (blur)="updateNote()">
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle>{{notes[NotesModelEnum.CREATION_DATE]|date:'short'}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="notes-form-control">
+        <div>
+            <div class="d-flex list-container"
+                *ngFor="let option of notes[NotesModelEnum.LIST][NotesModelEnum.UNCHECKED_LIST]; let unchecklistIndex = index">
+                <mat-checkbox (click)="sendToCheckedList(unchecklistIndex)"></mat-checkbox>
+                &nbsp;&nbsp;
+                <div class="list-text-div" contenteditable="true" [textContent]="option"
+                    (input)="notes[NotesModelEnum.LIST][NotesModelEnum.CHECKED_LIST][i]=$event.target.textContent">
+                </div>
+                <mat-icon class="mat-icon-form-field cursor-pointer item-remove-icon" title="Remove item"
+                    (click)="removeListItem(NotesModelEnum.UNCHECKED_LIST, unchecklistIndex)">close
+                </mat-icon>
+            </div>
+            <div class="d-flex">
+                <mat-icon class="mat-icon-form-field cursor-pointer">add</mat-icon>
+                <input class="new-item" matInput placeholder="List item" (blur)="addNewItem($event)"
+                    (keyup.enter)="addNewItem($event)">
+            </div>
+        </div>
+        <div class="list-divider"></div>
+        <div id="completed-heading">Completed items</div>
+        <div class="d-flex checked-list-container"
+            *ngFor="let option of notes[NotesModelEnum.LIST][NotesModelEnum.CHECKED_LIST]; let checklistIndex = index">
+            <mat-checkbox checked="true" (click)="sendToUncheckedList(checklistIndex)"></mat-checkbox>
+            &nbsp;&nbsp;
+            <div class="list-text-div list-completed" contenteditable="false" [textContent]="option"
+                (input)="notes[NotesModelEnum.LIST][NotesModelEnum.CHECKED_LIST][i]=$event.target.textContent"></div>
+            <mat-icon class="mat-icon-form-field cursor-pointer item-remove-icon" title="Remove item"
+                (click)="removeListItem(NotesModelEnum.CHECKED_LIST, checklistIndex)">close</mat-icon>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="d-flex justify-content-end">
+            <mat-icon class="mat-icon-form-field cursor-pointer" title="Delete notes" (click)="deleteNotes()">delete
+            </mat-icon>
+        </div>
+    </mat-card-actions>
+</mat-card>
