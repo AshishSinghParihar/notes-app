@@ -51,6 +51,7 @@ export class ImageNotesComponent extends NotesParent implements OnInit {
       this.imageNotesForm
         .get(this.NotesModelEnum.IMAGE_BASE64)
         .setValue(myReader.result);
+      this.updateNote();
     };
     myReader.readAsDataURL(file);
   }

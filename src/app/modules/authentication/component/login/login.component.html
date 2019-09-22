@@ -8,7 +8,8 @@
       <form [formGroup]="loginForm">
         <div class="row form-group mx-0">
           <mat-form-field class="col-12">
-            <input matInput placeholder="{{FieldLabelEnum.USERNAME}}" [formControlName]="UserEnum.USERNAME" required>
+            <input matInput placeholder="{{FieldLabelEnum.USERNAME}}" [formControlName]="UserEnum.USERNAME" required
+              (keyup.enter)="onLogin()" />
             <mat-error *ngIf="loginForm.controls[UserEnum.USERNAME].invalid">
               {{getErrorMessage(FieldLabelEnum.USERNAME, UserEnum.USERNAME)}}
             </mat-error>
@@ -17,7 +18,7 @@
         <div class="row form-group mx-0">
           <mat-form-field class="col-12">
             <input matInput placeholder="{{FieldLabelEnum.PASSWORD}}" [formControlName]="UserEnum.PASSWORD"
-              [type]="hidePassword ? 'password' : 'text'" required>
+              [type]="hidePassword ? 'password' : 'text'" required (keyup.enter)="onLogin()" />
             <button mat-icon-button matSuffix (mousedown)="togglePasswordShow()" (mouseup)="togglePasswordShow()"
               [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword"
               *ngIf="loginForm.controls[UserEnum.PASSWORD].value !== ''">
@@ -29,9 +30,6 @@
           </mat-form-field>
         </div>
       </form>
-      <!-- <div class="col-12 invalid-credentials error" *ngIf="invalidCredentials">
-        Invalid username or password!
-      </div> -->
     </mat-card-content>
     <mat-card-actions>
       <div class="d-flex">

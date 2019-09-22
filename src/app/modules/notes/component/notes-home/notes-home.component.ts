@@ -30,7 +30,7 @@ export class NotesHomeComponent implements OnInit {
   ngOnInit() {}
 
   onLogout() {
-    this.router.navigate([RouterEnum.HOME]);
+    this.router.navigate([RouterEnum.LOGIN]);
   }
 
   createNote(noteType: string) {
