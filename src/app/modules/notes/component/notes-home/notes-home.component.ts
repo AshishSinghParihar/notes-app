@@ -1,9 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UtilityService } from 'src/app/services/utility/utility.service';
-import { RouterEnum, UserEnum, NotesTypeEnum, NotesModelEnum } from 'src/app/enums/notes-app.enum';
+import {
+  RouterEnum,
+  UserEnum,
+  NotesTypeEnum,
+  NotesModelEnum
+} from 'src/app/enums/notes-app.enum';
 import { Router } from '@angular/router';
-import { TextNotes, ListNotes, LinkNotes } from 'src/app/models/notes.model';
+import {
+  TextNotes,
+  ListNotes,
+  LinkNotes,
+  ImageNotes
+} from 'src/app/models/notes.model';
 
 @Component({
   selector: 'app-notes-home',
@@ -39,7 +49,7 @@ export class NotesHomeComponent implements OnInit {
         break;
       }
       case NotesTypeEnum.IMAGE: {
-        note = new TextNotes();
+        note = new ImageNotes();
         break;
       }
     }

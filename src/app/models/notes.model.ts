@@ -39,3 +39,13 @@ export class LinkNotes extends Notes {
     this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.LINK;
   }
 }
+
+export class ImageNotes extends Notes {
+  [NotesModelEnum.IMAGE_BASE64] = '';
+  [NotesModelEnum.FILE_NAME] = '';
+
+  constructor() {
+    super();
+    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.IMAGE;
+  }
+}

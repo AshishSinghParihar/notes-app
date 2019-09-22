@@ -7,6 +7,8 @@ import { MaterialComponentsModule } from './modules/material-components/material
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     MaterialComponentsModule,
     AuthenticationModule,
-    SharedModule
+    SharedModule,
+    MatGoogleMapsAutocompleteModule,
+    AgmCoreModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

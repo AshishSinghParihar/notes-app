@@ -57,5 +57,7 @@ export enum NotesModelEnum {
   LINK = 'link',
   LIST = 'list',
   CHECKED_LIST = 'checkedList',
-  UNCHECKED_LIST = 'uncheckedList'
+  UNCHECKED_LIST = 'uncheckedList',
+  FILE_NAME = 'fileName',
+  IMAGE_BASE64 = 'imageBase64'
 }

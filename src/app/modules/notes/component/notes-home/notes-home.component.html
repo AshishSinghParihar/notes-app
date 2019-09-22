@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-center mb-4">
         <div class="d-flex justify-content-around notes-icon-container">
             <div class="flex-grow-1">
-                Take a note..
+                Select a note type to create new note
             </div>
             <div>
                 <mat-icon class="mat-note-icon cursor-pointer" title="New text note"
@@ -25,6 +25,11 @@
                     (click)="createNote(NotesTypeEnum.LINK)">language
                 </mat-icon>
             </div>
+            <div>
+                <mat-icon class="mat-note-icon cursor-pointer" title="New image note"
+                    (click)="createNote(NotesTypeEnum.IMAGE)">image
+                </mat-icon>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -39,6 +44,9 @@
                 </div>
                 <div *ngSwitchCase="NotesTypeEnum.LINK">
                     <app-link-notes [notes]="notes" [index]="i"></app-link-notes>
+                </div>
+                <div *ngSwitchCase="NotesTypeEnum.IMAGE">
+                    <app-image-notes [notes]="notes" [index]="i"></app-image-notes>
                 </div>
             </div>
         </div>
