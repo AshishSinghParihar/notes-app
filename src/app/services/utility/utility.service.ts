@@ -1,19 +1,47 @@
 import { Injectable } from '@angular/core';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { User } from 'src/app/models/user.model';
 import { FormControl } from '@angular/forms';
 import {
   ReactiveFormValidatorsEnum,
-  ErrorMessagesEnum
+  ErrorMessagesEnum,
+  UserEnum
 } from 'src/app/enums/notes-app.enum';
+import { Notes, TextNotes } from 'src/app/models/notes.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilityService {
-  registeredUsers: User[] = [];
+  private registeredUsers: User[] = [];
+  loggedInUser: User;
 
-  constructor() {}
+  constructor(private snackBar: MatSnackBar) {
+    const user1 = new User();
+    user1.username = 'asd';
+    user1.password = 'asd';
+    user1.firstName = 'Admin';
+    user1.lastName = 'Singh';
+
+    const notes = new TextNotes();
+    notes.title = 'Notes 1';
+    notes.text =
+      // tslint:disable-next-line: max-line-length
+      'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.';
+    notes.creationDate = new Date();
+    user1.notesList.push(notes);
+
+    const notes3 = new TextNotes();
+    notes3.title = 'Notes 2';
+    notes3.text =
+      // tslint:disable-next-line: max-line-length
+      'This is the second note';
+    user1.notesList.push(notes3);
+    this.registerUser(user1);
+    this.loggedInUser = user1;
+  }
 
   getFormControlRequiredErrorMessage(
     controlLabel: string,
@@ -24,5 +52,62 @@ export class UtilityService {
       errorMsg = controlLabel + ErrorMessagesEnum.REQUIRED_ERROR_SUFFIX;
     }
     return errorMsg;
+  }
+
+  getAllRegisteredUsers() {
+    return this.registeredUsers;
+  }
+
+  registerUser(userDetails: User) {
+    this.registeredUsers.push(userDetails);
+  }
+
+  verifyUser(username: string, password: string): User[] {
+    return this.registeredUsers.filter(
+      (user: User) =>
+        user[UserEnum.USERNAME] === username &&
+        user[UserEnum.PASSWORD] === password
+    );
+  }
+
+  setLoggedInUser(user: User) {
+    this.loggedInUser = user;
+  }
+
+  getLoggedInUser(): User {
+    return this.loggedInUser;
+  }
+
+  deleteNotes(index: number) {
+    this.registeredUsers.forEach((user: User) => {
+      if (user[UserEnum.USERNAME] === this.loggedInUser[UserEnum.USERNAME]) {
+        user[UserEnum.NOTES_LIST].splice(index, 1);
+      }
+    });
+    console.log(this.registeredUsers);
+  }
+
+  createNotes(note: Notes) {
+    this.registeredUsers.forEach((user: User) => {
+      if (user[UserEnum.USERNAME] === this.loggedInUser[UserEnum.USERNAME]) {
+        user[UserEnum.NOTES_LIST].push(note);
+      }
+    });
+    console.log(this.registeredUsers);
+  }
+
+  updateNote(note: Notes, index: number) {
+    this.registeredUsers.forEach((user: User) => {
+      if (user[UserEnum.USERNAME] === this.loggedInUser[UserEnum.USERNAME]) {
+        user[UserEnum.NOTES_LIST][index] = note;
+      }
+    });
+    console.log(this.registeredUsers);
+  }
+
+  openSnackBar(message: string, actionText: string, duration: number = 3) {
+    return this.snackBar.open(message, actionText, {
+      duration: duration * 1000
+    });
   }
 }

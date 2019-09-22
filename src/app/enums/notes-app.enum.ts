@@ -6,7 +6,8 @@ export enum UserEnum {
   DOB = 'dateOfBirth',
   GENDER = 'gender',
   CONTACT_NUMBER = 'contactNumber',
-  EMAIL = 'email'
+  EMAIL = 'email',
+  NOTES_LIST = 'notesList'
 }
 
 export enum LoginFormErrorEnum {
@@ -18,7 +19,8 @@ export enum RouterEnum {
   HOME = '',
   AUTHENTICATION = 'auth',
   LOGIN = 'login',
-  SIGNUP = 'signup'
+  SIGNUP = 'signup',
+  NOTES = 'notes'
 }
 
 export enum ReactiveFormValidatorsEnum {
@@ -37,4 +39,23 @@ export enum FieldLabelEnum {
   DOB = 'Date of birth',
   EMAIL = 'Email',
   PHONE_NUMBER = 'Phone number'
+}
+
+export enum NotesTypeEnum {
+  TEXT = 'TEXT',
+  LIST = 'LIST',
+  LINK = 'LINK',
+  MAP = 'MAP',
+  IMAGE = 'IMAGE'
+}
+
+export enum NotesModelEnum {
+  TITLE = 'title',
+  CREATION_DATE = 'creationDate',
+  NOTES_TYPE = 'notesType',
+  TEXT = 'text',
+  LINK = 'link',
+  LIST = 'list',
+  CHECKED_LIST = 'checkedList',
+  UNCHECKED_LIST = 'uncheckedList'
 }

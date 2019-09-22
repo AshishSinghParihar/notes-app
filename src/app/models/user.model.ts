@@ -1,4 +1,5 @@
 import { UserEnum } from '../enums/notes-app.enum';
+import { Notes } from './notes.model';
 
 export class User {
   [UserEnum.USERNAME]: string;
@@ -8,4 +9,5 @@ export class User {
   [UserEnum.DOB]: string;
   [UserEnum.CONTACT_NUMBER]: string;
   [UserEnum.EMAIL]: string;
+  [UserEnum.NOTES_LIST]: Notes[] = [];
 }

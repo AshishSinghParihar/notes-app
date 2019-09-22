@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   FormGroup,
   FormBuilder,
@@ -13,6 +13,7 @@ import {
   FieldLabelEnum
 } from '../../../../enums/notes-app.enum';
 import { UtilityService } from 'src/app/services/utility/utility.service';
+import { NotesAppContants } from 'src/app/constants/notes-app.constant';
 
 @Component({
   selector: 'app-login',
@@ -24,10 +25,11 @@ export class LoginComponent implements OnInit {
   FieldLabelEnum = FieldLabelEnum;
   loginForm: FormGroup;
   hidePassword = true;
+  invalidCredentials = false;
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
+    private formBuilder: FormBuilder,
     private utilityService: UtilityService
   ) {}
 
@@ -54,7 +56,23 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log('login');
+    const username = this.loginForm.controls[UserEnum.USERNAME].value;
+    const password = this.loginForm.controls[UserEnum.PASSWORD].value;
+    const user = this.utilityService.verifyUser(username, password);
+    if (user.length === 0) {
+      // this.invalidCredentials = true;
+      const snackBarRef = this.utilityService.openSnackBar(
+        NotesAppContants.INVALID_CREDENTIALS_MSG,
+        'Okay',
+        5
+      );
+      snackBarRef.onAction().subscribe(() => {
+        snackBarRef.dismiss();
+      });
+    } else {
+      this.utilityService.setLoggedInUser(user[0]);
+      this.router.navigate([RouterEnum.NOTES + '/' + username]);
+    }
   }
 
   togglePasswordShow() {

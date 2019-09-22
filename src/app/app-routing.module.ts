@@ -7,10 +7,16 @@ import { LoginComponent } from './modules/authentication/component/login/login.c
 const routes: Routes = [
   { path: '', component: SignUpComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  {
+    path: 'notes/:username',
+    loadChildren: () =>
+      import('./modules/notes/notes.module').then(m => m.NotesModule),
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

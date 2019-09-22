@@ -1,4 +1,4 @@
-<div class="container-div d-flex justify-content-center">
+<div class="d-flex justify-content-center">
   <mat-card class="signup-card mt-5">
     <mat-card-header>
       <mat-card-title>Sign Up</mat-card-title>
@@ -69,9 +69,9 @@
       <div class="d-flex">
         <div>
           <button mat-button (click)="resetSignUpForm()">Reset</button>
-          <button mat-button color="primary" (click)="onSignUp()">Join</button>
+          <button mat-button color="primary" (click)="onSignUp()" [disabled]="signUpForm.invalid">Sign Up</button>
         </div>
-        <div class="ml-auto">
+        <div class="ml-auto mt-2 pr-3">
           <span class="hint-text">Already registered?</span>&nbsp;&nbsp;<span class="text-button"
             (click)="goToLoginPage()">Login</span>
         </div>

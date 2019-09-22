@@ -1,0 +1,22 @@
+<mat-card [formGroup]="textNotesForm">
+    <mat-card-header>
+        <mat-card-title>
+            <div class="notes-form-control">
+                <input matInput placeholder="Title" [formControlName]="NotesModelEnum.TITLE" (blur)="updateNote()">
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle>{{notes[NotesModelEnum.CREATION_DATE]|date:'short'}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="notes-form-control">
+        <mat-form-field>
+            <textarea class="textarea-div" matInput placeholder="Text"
+                [formControlName]="NotesModelEnum.TEXT" (blur)="updateNote()"></textarea>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="d-flex justify-content-end">
+            <mat-icon class="mat-icon-form-field cursor-pointer" title="Delete notes" (click)="deleteNotes()">delete</mat-icon>
+        </div>
+    </mat-card-actions>
+</mat-card>

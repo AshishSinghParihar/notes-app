@@ -5,6 +5,7 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
+
 import {
   UserEnum,
   RouterEnum,
@@ -13,6 +14,7 @@ import {
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
 import { UtilityService } from 'src/app/services/utility/utility.service';
+import { NotesAppContants } from 'src/app/constants/notes-app.constant';
 
 @Component({
   selector: 'app-sign-up',
@@ -73,7 +75,16 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp() {
-    this.utilityService.registeredUsers.push(this.signUpForm.value);
-    console.log('users', this.utilityService.registeredUsers);
+    this.utilityService.registerUser(this.signUpForm.value);
+    this.signUpForm.reset();
+    const snackBarRef = this.utilityService.openSnackBar(
+      NotesAppContants.SIGNUP_SUCCESS_MSG,
+      'Login now',
+      7
+    );
+    snackBarRef.onAction().subscribe(() => {
+      this.goToLoginPage();
+    });
+    console.log('users', this.utilityService.getAllRegisteredUsers());
   }
 }
