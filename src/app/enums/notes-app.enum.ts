@@ -61,3 +61,9 @@ export enum NotesModelEnum {
   FILE_NAME = 'fileName',
   IMAGE_BASE64 = 'imageBase64'
 }
+
+export enum PatternEnum {
+  NUMERIC = '^[0-9]*$',
+  ALPHANUMERIC_WITHOUT_SPACE_N_SPECIAL_CHARS = '^[0-9a-zA-Z_]*$',
+  ALPHANUMERIC_WITH_SPECIAL_CHARS = '^[0-9a-zA-Z!@#$%^&*()_]*$'
+}

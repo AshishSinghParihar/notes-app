@@ -17,6 +17,7 @@ import { Notes, TextNotes, ListNotes, List } from 'src/app/models/notes.model';
 export class UtilityService {
   private registeredUsers: User[] = [];
   loggedInUser: User;
+  isLoggedin: boolean;
 
   constructor(private snackBar: MatSnackBar) {
     const user1 = new User();

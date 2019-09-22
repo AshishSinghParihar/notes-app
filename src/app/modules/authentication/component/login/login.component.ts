@@ -10,7 +10,8 @@ import {
 import {
   UserEnum,
   RouterEnum,
-  FieldLabelEnum
+  FieldLabelEnum,
+  PatternEnum
 } from '../../../../enums/notes-app.enum';
 import { UtilityService } from 'src/app/services/utility/utility.service';
 import { NotesAppContants } from 'src/app/constants/notes-app.constant';
@@ -39,8 +40,22 @@ export class LoginComponent implements OnInit {
 
   formInitialize() {
     return this.formBuilder.group({
-      [UserEnum.USERNAME]: ['', [Validators.required]],
-      [UserEnum.PASSWORD]: ['', [Validators.required]]
+      [UserEnum.USERNAME]: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            PatternEnum.ALPHANUMERIC_WITHOUT_SPACE_N_SPECIAL_CHARS
+          )
+        ]
+      ],
+      [UserEnum.PASSWORD]: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(PatternEnum.ALPHANUMERIC_WITH_SPECIAL_CHARS)
+        ]
+      ]
     });
   }
 
@@ -60,7 +75,6 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.controls[UserEnum.PASSWORD].value;
     const user = this.utilityService.verifyUser(username, password);
     if (user.length === 0) {
-      // this.invalidCredentials = true;
       const snackBarRef = this.utilityService.openSnackBar(
         NotesAppContants.INVALID_CREDENTIALS_MSG,
         'Okay',
@@ -70,6 +84,7 @@ export class LoginComponent implements OnInit {
         snackBarRef.dismiss();
       });
     } else {
+      this.utilityService.isLoggedin = true;
       this.utilityService.setLoggedInUser(user[0]);
       this.router.navigate([RouterEnum.NOTES + '/' + username]);
     }

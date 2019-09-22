@@ -9,12 +9,14 @@ import {
 import {
   UserEnum,
   RouterEnum,
-  FieldLabelEnum
+  FieldLabelEnum,
+  PatternEnum
 } from '../../../../enums/notes-app.enum';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { NotesAppPattern } from '../../../../patterns/custom-patters';
 import { Router } from '@angular/router';
 import { UtilityService } from 'src/app/services/utility/utility.service';
 import { NotesAppContants } from 'src/app/constants/notes-app.constant';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,14 +26,9 @@ import { NotesAppContants } from 'src/app/constants/notes-app.constant';
 export class SignUpComponent implements OnInit {
   UserEnum = UserEnum;
   FieldLabelEnum = FieldLabelEnum;
+  numberOnly = new NotesAppPattern().numberOnly;
   signUpForm: FormGroup;
   hidePassword = true;
-
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,13 +42,27 @@ export class SignUpComponent implements OnInit {
 
   formInitialize() {
     return this.formBuilder.group({
-      [UserEnum.USERNAME]: ['', Validators.required],
-      [UserEnum.PASSWORD]: ['', Validators.required],
+      [UserEnum.USERNAME]: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            PatternEnum.ALPHANUMERIC_WITHOUT_SPACE_N_SPECIAL_CHARS
+          )
+        ]
+      ],
+      [UserEnum.PASSWORD]: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(PatternEnum.ALPHANUMERIC_WITH_SPECIAL_CHARS)
+        ]
+      ],
       [UserEnum.FIRST_NAME]: ['', Validators.required],
       [UserEnum.LAST_NAME]: ['', Validators.required],
       [UserEnum.DOB]: [''],
-      [UserEnum.CONTACT_NUMBER]: [''],
-      [UserEnum.EMAIL]: ['']
+      [UserEnum.CONTACT_NUMBER]: ['', Validators.pattern(PatternEnum.NUMERIC)],
+      [UserEnum.EMAIL]: ['', Validators.email]
     });
   }
 
@@ -75,6 +86,10 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp() {
+    if (this.checkDuplicateUser().length === 1) {
+      this.duplicateUserExists();
+      return;
+    }
     this.utilityService.registerUser(this.signUpForm.value);
     this.signUpForm.reset();
     const snackBarRef = this.utilityService.openSnackBar(
@@ -85,6 +100,22 @@ export class SignUpComponent implements OnInit {
     snackBarRef.onAction().subscribe(() => {
       this.goToLoginPage();
     });
-    console.log('users', this.utilityService.getAllRegisteredUsers());
+  }
+
+  checkDuplicateUser() {
+    return this.utilityService
+      .getAllRegisteredUsers()
+      .filter(
+        (user: User) =>
+          user[UserEnum.USERNAME] === this.signUpForm.value[UserEnum.USERNAME]
+      );
+  }
+
+  duplicateUserExists() {
+    this.utilityService.openSnackBar(
+      NotesAppContants.DUPLICATE_USER_EXISTS_MSG,
+      'Okay',
+      4
+    );
   }
 }

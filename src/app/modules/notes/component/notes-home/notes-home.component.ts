@@ -30,6 +30,7 @@ export class NotesHomeComponent implements OnInit {
   ngOnInit() {}
 
   onLogout() {
+    this.utilityService.isLoggedin = false;
     this.router.navigate([RouterEnum.LOGIN]);
   }
 
