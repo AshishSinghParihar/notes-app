@@ -28,13 +28,13 @@ Navigate to `http://localhost:4200/` in your browser. The app will automatically
 ### Sign up
 The first page of the application is the Sign up page.
 The application allows to register a user by entering basic details of the user with below validation
-`First name` : Required field,
-`Last name` : Required field,
-`Username` : Required field, alphanumeric with space or special characters,
-`Password` : Required field, alphnumeric with special characters,
-`Date of birth`,
-`Email` : Valid email pattern,
-`Phone number` : Numerical
+>`First name` : Required field,
+>`Last name` : Required field,
+>`Username` : Required field, alphanumeric with space or special characters,
+>`Password` : Required field, alphnumeric with special characters,
+>`Date of birth`,
+>`Email` : Valid email pattern,
+>`Phone number` : Numerical
 
 A user can be registered only when above validations are passed.
 
