@@ -65,5 +65,6 @@ export enum NotesModelEnum {
 export enum PatternEnum {
   NUMERIC = '^[0-9]*$',
   ALPHANUMERIC_WITHOUT_SPACE_N_SPECIAL_CHARS = '^[0-9a-zA-Z_]*$',
-  ALPHANUMERIC_WITH_SPECIAL_CHARS = '^[0-9a-zA-Z!@#$%^&*()_]*$'
+  ALPHANUMERIC_WITH_SPECIAL_CHARS = '^[0-9a-zA-Z!@#$%^&*()_]*$',
+  URL_PATTERN = '^(((http|https):\/\/)?(www.)?)?[a-zA-z]+\.[a-zA-Z]+$'
 }

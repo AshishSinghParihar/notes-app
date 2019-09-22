@@ -1,27 +1,53 @@
 # NotesApp
+This is a demo Angular application that enbales Signup/Login for a user and allows the user to create notes of type Text, List, Link and Image. All the data is saved in application's local memory hence all the data would be erased when the application loads/refreshes.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
 
-## Development server
+## Setting up the application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Step 1: Clone/Unzip application
+The application is available in [GitHub](https://github.com/AshishSinghParihar/notes-app).
+Use Git Bash and enter command
+>> `git clone https://github.com/AshishSinghParihar/notes-app.git`
+to clone the application in your system.
 
-## Code scaffolding
+Alternatively, use the zip file and unzip in your system.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Step 2: Install dependencies
+Open Command Prompt and go into the application's home directory and install the dependencies by typing the following command -
+>> `npm install`
+This will intall all the dependencies of the application.
 
-## Build
+### Step 3: Serve the application
+Run below command to run the application on local browser
+>> `ng serve`
+Navigate to `http://localhost:4200/` in your browser. The app will automatically reload if you change any of the source files.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Features of the application
 
-## Running unit tests
+### Sign up
+The first page of the application is the Sign up page.
+The application allows to register a user by entering basic details of the user with below validation
+`First name` : Required field,
+`Last name` : Required field,
+`Username` : Required field, alphanumeric with space or special characters,
+`Password` : Required field, alphnumeric with special characters,
+`Date of birth`,
+`Email` : Valid email pattern,
+`Phone number` : Numerical
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A user can be registered only when above validations are passed.
 
-## Running end-to-end tests
+### Login
+A user can login by entering valid `Username` and `Password`.
+If the credentials do not match any registered user's credentials, error message is shown.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Create notes
+After logging in, a user can create notes of type `Text`, `List`, `Link` and `Image`.
+The notes can be edited or deleted.
+For `List` notes, the user can make list of items and and mark items as done or delete items.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+
