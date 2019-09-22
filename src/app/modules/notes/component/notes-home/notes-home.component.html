@@ -5,7 +5,28 @@
     <button class="btn btn-primary" (click)="onLogout()">Logout</button>
 </div>
 <div class="notes-container mt-5">
-    <div (click)="createNote(NotesTypeEnum.TEXT)">Take a note.. | Text</div>
+    <div class="d-flex justify-content-center mb-4">
+        <div class="d-flex justify-content-around notes-icon-container">
+            <div class="flex-grow-1">
+                Take a note..
+            </div>
+            <div>
+                <mat-icon class="mat-note-icon cursor-pointer" title="New text note"
+                    (click)="createNote(NotesTypeEnum.TEXT)">title
+                </mat-icon>
+            </div>
+            <div>
+                <mat-icon class="mat-note-icon cursor-pointer" title="New list note"
+                    (click)="createNote(NotesTypeEnum.LIST)">list
+                </mat-icon>
+            </div>
+            <div>
+                <mat-icon class="mat-note-icon cursor-pointer" title="New link note"
+                    (click)="createNote(NotesTypeEnum.LINK)">language
+                </mat-icon>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12"
             *ngFor="let notes of utilityService.loggedInUser.notesList; let i = index">
@@ -15,6 +36,9 @@
                 </div>
                 <div *ngSwitchCase="NotesTypeEnum.LIST">
                     <app-list-notes [notes]="notes" [index]="i"></app-list-notes>
+                </div>
+                <div *ngSwitchCase="NotesTypeEnum.LINK">
+                    <app-link-notes [notes]="notes" [index]="i"></app-link-notes>
                 </div>
             </div>
         </div>

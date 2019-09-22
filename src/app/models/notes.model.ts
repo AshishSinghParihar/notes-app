@@ -13,29 +13,29 @@ export class TextNotes extends Notes {
 
   constructor() {
     super();
-    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.TEXT.toString();
-  }
-}
-
-export class ListNotes extends Notes {
-  [NotesModelEnum.LIST]: List;
-
-  constructor() {
-    super();
-    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.LIST.toString();
+    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.TEXT;
   }
 }
 
 export class List {
-  [NotesModelEnum.CHECKED_LIST]: string[];
-  [NotesModelEnum.UNCHECKED_LIST]: string[];
+  [NotesModelEnum.CHECKED_LIST]: string[] = [];
+  [NotesModelEnum.UNCHECKED_LIST]: string[] = [];
 }
 
-export class LinkNotes extends Notes {
-  [NotesModelEnum.LINK]: string;
+export class ListNotes extends Notes {
+  [NotesModelEnum.LIST] = new List();
 
   constructor() {
     super();
-    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.LINK.toString();
+    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.LIST;
+  }
+}
+
+export class LinkNotes extends Notes {
+  [NotesModelEnum.LINK] = '';
+
+  constructor() {
+    super();
+    this[NotesModelEnum.NOTES_TYPE] = NotesTypeEnum.LINK;
   }
 }

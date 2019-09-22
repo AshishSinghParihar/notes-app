@@ -80,9 +80,10 @@ export class UtilityService {
   }
 
   deleteNotes(index: number) {
+    this.loggedInUser[UserEnum.NOTES_LIST].splice(index, 1);
     this.registeredUsers.forEach((user: User) => {
       if (user[UserEnum.USERNAME] === this.loggedInUser[UserEnum.USERNAME]) {
-        user[UserEnum.NOTES_LIST].splice(index, 1);
+        user = this.loggedInUser;
       }
     });
     console.log(this.registeredUsers);
